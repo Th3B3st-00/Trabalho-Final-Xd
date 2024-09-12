@@ -57,31 +57,84 @@
             .login-container button:hover {
                 background-color: #0056b3;
             }
+
+            
+
         </style>
+
+<script>
+    function cadastrarProfessor() {
+        // Captura os valores dos inputs
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const idade = document.getElementById('idade').value;
+
+        // Cria o objeto com os dados
+        const professor = {
+            nome: nome,
+            email: email,
+            idade: parseInt(idade, 10) // Converte a idade para número
+        };
+
+        // Faz a solicitação POST para o backend
+        fetch('http://localhost:3000/professores', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(professor)
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Aqui fica o que o sistema deve fazer quando o cadastro deu certo
+                    alert('Bem vindo ao sistema!')
+                    
+                }
+                throw new Error('Erro ao cadastrar a pessoa');
+            })
+            .then(data => {
+                console.log('Pessoa cadastrada com sucesso:', data);
+                // Limpar os campos de entrada após o envio
+                document.getElementById('nome').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('idade').value = '';
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    }
+</script>
+
         </head>
 </body>
                         <div class="login-container">
                             <h2>Cadastro Professor</h2>
-                            <form action="/login" method="post">
+                            <form action="/login" method="POST">
                               
-                             <label for="username">Insira sua formação:</label>
+                                <label for="username">Insira sua formação:</label>
                                 <input type="text" id="password" name="username" required>
-                                     <label for="username">Nome completo:</label>
-                                <input type="text" id="password" name="username" required>
-                                   <label for="password">CPF:</label>
+
+                                <label for="username">Nome completo:</label>
+                                <input type="text" id="nome" name="username" required>
+
+                                <label for="password">CPF:</label>
                                 <input type="password" id="password" name="password" required>
-                                  <label for="username">Data de nascimento:</label>
-                                <input type="text" id="password" name="username" required>
-                                  <label for="username">E-mail:</label>
-                                <input type="text" id="password" name="username" required>
+
+                                <label for="username">Data de nascimento:</label>
+                                <input type="text" id="idade" name="username" required>
+
+                                <label for="username">E-mail:</label>
+                                <input type="text" id="email" name="username" required>
                                    
                                 <label for="username">Confirme o e-mail:</label>
                                 <input type="text" id="password" name="username" required>
                              
                                 <label for="password">Senha:</label>
                                 <input type="password" id="password" name="password" required>
+
                                 <label for="password">Confirme a senha:</label>
                                 <input type="password" id="password" name="password" required>
+
                                 <button style="margin-top: 15px; background-color: rgb(32, 218, 26);" type="submit">Prosseguir com o cadastro</button>
                                 
                             </form>
