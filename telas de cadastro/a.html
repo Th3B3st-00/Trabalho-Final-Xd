@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<!-- saved from url=(0087)https://ava.sesisenai.org.br/pluginfile.php/1064482/mod_resource/content/1/request.html -->
-<html lang="pt-br"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Pessoa</title>
-</head>
+<html lang="pt-br">
+     <head>
 
+        <meta charset="UTF-8">
+        <meta name="viewport" conmtent="width=device-width, initial-scale=1.0">
+        <title>cadastro</title>
+      
+
+
+
+
+        </head>
+</body>
 <body>
     <h1>Cadastro de Pessoa</h1>
 
@@ -18,29 +23,33 @@
     <label for="idade">Idade:</label>
     <input type="number" id="idade" placeholder="Digite a idade"><br><br>
 
-    <button onclick="cadastrarPessoa()">Cadastrar</button>
+    <button onclick="cadastrarProfessor()">Cadastrar</button>
 
     <script>
-        function cadastrarPessoa() {
+        function cadastrarAluno() {
             // Captura os valores dos inputs
             const nome = document.getElementById('nome').value;
             const email = document.getElementById('email').value;
-            const idade = document.getElementById('idade').value;
+            const data_nasc = document.getElementById('data_nasc').value;
+            const senha = document.getElementById('senha').value;
+            const cpf = document.getElementById('cpf').value;
 
             // Cria o objeto com os dados
-            const pessoa = {
+            const aluno = {
                 nome: nome,
                 email: email,
-                idade: parseInt(idade, 10) // Converte a idade para número
+                data_nasc: parseInt(data_nasc, 10), // Converte a idade para número
+                senha: senha,
+                cpf: cpf
             };
 
             // Faz a solicitação POST para o backend
-            fetch('http://localhost:3000/professor', {
+            fetch('http://localhost:3000/professores', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(pessoa)
+                body: JSON.stringify(aluno)
             })
                 .then(response => {
                     if (response.ok) {
@@ -48,14 +57,16 @@
                         alert('Bem vindo ao sistema!')
                         
                     }
-                    throw new Error('Erro ao cadastrar a pessoa');
                 })
                 .then(data => {
-                    console.log('Pessoa cadastrada com sucesso:', data);
+                    console.log('aluno cadastrada com sucesso:', data);
                     // Limpar os campos de entrada após o envio
                     document.getElementById('nome').value = '';
                     document.getElementById('email').value = '';
-                    document.getElementById('idade').value = '';
+                    document.getElementById('data_nasc').value = '';
+                    document.getElementById('senha').value = '';
+                    document.getElementById('cpf').value = '';
+                    
                 })
                 .catch(error => {
                     console.error('Erro:', error);
@@ -65,4 +76,6 @@
     </script>
 
 
-</body></html>
+</body>
+
+</html>

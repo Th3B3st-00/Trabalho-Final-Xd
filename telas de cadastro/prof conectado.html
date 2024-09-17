@@ -67,17 +67,21 @@
         // Captura os valores dos inputs
         const nome = document.getElementById('nome').value;
         const email = document.getElementById('email').value;
-        const idade = document.getElementById('idade').value;
+        const data_nasc = document.getElementById('data_nasc').value;
+        const senha = document.getElementById('senha').value;
+        const cpf = document.getElementById('cpf').value;
 
         // Cria o objeto com os dados
         const professor = {
-            nome: nome,
+            nome_professor: nome,
             email: email,
-            idade: parseInt(idade, 10) // Converte a idade para número
+            data_nasc: parseInt(data_nasc, 10), // Converte a idade para número
+            senha: senha,
+            cpf: cpf
         };
 
         // Faz a solicitação POST para o backend
-        fetch('http://localhost:3000/professores', {
+        fetch('http://localhost:3000/professor', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -90,17 +94,20 @@
                     alert('Bem vindo ao sistema!')
                     
                 }
-                throw new Error('Erro ao cadastrar a pessoa');
             })
             .then(data => {
-                console.log('Pessoa cadastrada com sucesso:', data);
+                console.log('aluno cadastrada com sucesso:', data);
                 // Limpar os campos de entrada após o envio
                 document.getElementById('nome').value = '';
                 document.getElementById('email').value = '';
-                document.getElementById('idade').value = '';
+                document.getElementById('data_nasc').value = '';
+                document.getElementById('senha').value = '';
+                document.getElementById('cpf').value = '';
+                
             })
             .catch(error => {
                 console.error('Erro:', error);
+                alert('Deu errado!')
             });
     }
 </script>
@@ -110,40 +117,29 @@
                         <div class="login-container">
                             <h2>Cadastro Professor</h2>
 
-                            <form action="/login" method="POST">
+                                <label for="nome">Nome completo:</label>
+                                <input type="text" id="nome">
 
-                              
-                                <label for="username">Insira sua formação:</label>
-                                <input type="text" id="password" name="username" required>
+                                <label for="cpf">CPF:</label>
+                                <input type="password" id="cpf">
 
-                                <label for="username">Nome completo:</label>
-                                <input type="text" id="nome" name="username" required>
+                                <label for="data_nasc">Data de nascimento:</label>
+                                <input type="text" id="data_nasc">
 
-                                <label for="password">CPF:</label>
-                                <input type="password" id="password" name="password" required>
-
-                                <label for="username">Data de nascimento:</label>
-                                <input type="text" id="idade" name="username" required>
-
-                                <label for="username">E-mail:</label>
-                                <input type="text" id="email" name="username" required>
+                                <label for="email">E-mail:</label>
+                                <input type="text" id="email">
                                    
-                                <label for="username">Confirme o e-mail:</label>
-                                <input type="text" id="password" name="username" required>
+                                <label for="email">Confirme o e-mail:</label>
+                                <input type="text">
                              
-                                <label for="password">Senha:</label>
-                                <input type="password" id="password" name="password" required>
+                                <label for="senha">Senha:</label>
+                                <input type="password" id="senha">
 
-                                <label for="password">Confirme a senha:</label>
-                                <input type="password" id="password" name="password" required>
+                                <label for="senha">Confirme a senha:</label>
+                                <input type="password">
 
-
-                                <button style="margin-top: 15px; background-color: rgb(32, 218, 26);" type="submit">Prosseguir com o cadastro</button>
-
-                               <a href="arquivo.html"><button style="margin-top: 15px; background-color: rgb(32, 218, 26);" type="submit">Prosseguir com o cadastro</button></a>
-
-                                
-                            </form>
+                               <button style="margin-top: 15px; background-color: rgb(32, 218, 26);" onclick="cadastrarProfessor()">Prosseguir com o cadastro</button>
+                            
                         </div>
                     </body>
 
