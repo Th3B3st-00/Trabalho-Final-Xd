@@ -26,6 +26,9 @@ professor.init({
     },
     endereco: {
         type: DataTypes.TEXT
+    },
+    senha: {
+        type: DataTypes.TEXT
     }
 }, {
     sequelize,

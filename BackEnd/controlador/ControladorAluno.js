@@ -1,9 +1,10 @@
+const aluno = require('../modelo/aluno');
 const Aluno = require('../modelo/aluno');
 
 const ControladorAluno = {
     createAluno: async (req, res) => {
         try {
-            const novoAluno = await Aluno.create(req.body);
+            const novoAluno = await Alunos.create(req.body);
             res.json(novoAluno);
         } catch (error) {
             res.status(500).send(error.message);
@@ -12,7 +13,7 @@ const ControladorAluno = {
 
     getAllAlunos: async (req, res) => {
         try {
-            const aluno = await Aluno.findAll();
+            const aluno = await Alunos.findAll();
             res.json(aluno);
         } catch (error) {
             res.status(500).send(error.message);
@@ -21,7 +22,7 @@ const ControladorAluno = {
 
     getAlunoById: async (req, res) => {
         try {
-            const produto = await Aluno.findByPk(req.params.id);
+            const produto = await Alunos.findByPk(req.params.id);
             if (!produto) {
                 return res.status(404).send('Aluno não encontrado');
             }
@@ -33,7 +34,7 @@ const ControladorAluno = {
 
     updateAluno: async (req, res) => {
         try {
-            const produto = await Aluno.findByPk(req.params.id);
+            const produto = await Alunos.findByPk(req.params.id);
             if (!produto) {
                 return res.status(404).send('Aluno não encontrado');
             }
@@ -46,7 +47,7 @@ const ControladorAluno = {
 
     deleteAluno: async (req, res) => {
         try {
-            const produto = await Aluno.findByPk(req.params.id);
+            const produto = await Alunos.findByPk(req.params.id);
             if (!produto) {
                 return res.status(404).send('Aluno não encontrado');
             }
@@ -59,20 +60,22 @@ const ControladorAluno = {
 
     login: async (req, res) => {
         try {
-            const aluno = await aluno.findByPk(req.params.id);
-            if (aluno.email == req.body.email && aluno.senha == req.body.senha) {
-                return res.status(200).send('Aluno logado com sucesso');
+            const aluno = await Alunos.findOne({
+                where: {
+                    email: req.body.email // Usa o e-mail que veio do frontend
+                }
+            });
+
+            if(req.body.email == aluno.email && req.body.senha == aluno.senha){
+                res.json(aluno)
+                console.log('Deu certo')
             } else {
-                res.send('E-mail ou senha incorretos');
+                res.status(400).send('Email ou senha incorreta')
             }
         } catch (error) {
             res.status(500).send(error.message);
         }
-    },
-
-    // Implementação das funções de controle de estoque
-    // registrarEntrada e registrarSaida
-    // ... (a ser implementado)
+    }
 };
 
 module.exports = ControladorAluno;

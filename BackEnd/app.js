@@ -7,7 +7,7 @@ const db = require('./config/database')
 // Testar comunicação com DB
 db.authenticate()
 .then(() => console.log('Autenticado com sucesso!'))
-.catch(() => console.log('Deu problema conectando com o banco'))
+.catch(() => console.log('Liga o XAMPP kakakakkak'))
 
 app.use(express.json());
 app.use(cors())

@@ -59,11 +59,16 @@ const ControladorProfessor = {
 
     login: async (req, res) => {
         try {
-            const professor = await professor.findByPk(req.params.id);
-            if (professor.email == req.body.email && professor.senha == req.body.senha) {
-                return res.status(200).send('Professor logado com sucesso');
+            const professor = await Professores.findOne({
+                where: {
+                    email: req.body.email // Usa o e-mail que veio do frontend
+                }
+            });
+
+            if(req.body.email == professor.email && req.body.senha == professor.senha){
+                res.json(professor)
             } else {
-                res.send('E-mail ou senha incorretos');
+                res.status(400).send('Email ou senha incorreta')
             }
         } catch (error) {
             res.status(500).send(error.message);

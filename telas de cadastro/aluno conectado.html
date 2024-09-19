@@ -61,11 +61,8 @@
         </head>
 </body>
                         <div class="login-container">
-                            <form>
+                            <div>
                             <h2>Cadastro Aluno</h2>
-                            
-                              
-                          
                                 <label for="nome">Nome completo:</label>
                                 <input id="nome" type="text">
                                    
@@ -79,17 +76,17 @@
                                 <input type="text" id="email">
                                    
                                 <label for="email">Confirme o e-mail:</label>
-                                <input type="text" id="email">
+                                <input type="text" id="a">
                              
                                 <label for="senha">Senha:</label>
                                 <input type="password" id="senha">
 
                                 <label for="senha">Confirme a senha:</label>
-                                <input type="password" id="senha">
+                                <input type="password" id="b">
 
                                <button style="margin-top: 15px; background-color: rgb(32, 218, 26);" onclick="cadastrarAluno()">Prosseguir com o cadastro</button>
                                 
-                            </form>
+                            </div>
                         </div>
 
                         <script>
@@ -100,10 +97,10 @@
                                 const data_nasc = document.getElementById('data_nasc').value;
                                 const senha = document.getElementById('senha').value;
                                 const cpf = document.getElementById('cpf').value;
-        
+
                                 // Cria o objeto com os dados
                                 const aluno = {
-                                    nome: nome,
+                                    nome_aluno: nome,
                                     email: email,
                                     data_nasc: parseInt(data_nasc, 10), // Converte a idade para número
                                     senha: senha,
@@ -122,6 +119,7 @@
                                         if (response.ok) {
                                             // Aqui fica o que o sistema deve fazer quando o cadastro deu certo
                                             alert('Bem vindo ao sistema!')
+                                            window.location.href="primeira tela copy.html"
                                             
                                         }
                                     })
