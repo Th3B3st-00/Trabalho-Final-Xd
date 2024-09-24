@@ -1,10 +1,9 @@
-const aluno = require('../modelo/aluno');
 const Aluno = require('../modelo/aluno');
 
 const ControladorAluno = {
     createAluno: async (req, res) => {
         try {
-            const novoAluno = await Alunos.create(req.body);
+            const novoAluno = await Aluno.create(req.body);
             res.json(novoAluno);
         } catch (error) {
             res.status(500).send(error.message);
@@ -60,7 +59,7 @@ const ControladorAluno = {
 
     login: async (req, res) => {
         try {
-            const aluno = await Alunos.findOne({
+            const aluno = await Aluno.findOne({
                 where: {
                     email: req.body.email // Usa o e-mail que veio do frontend
                 }
@@ -70,7 +69,7 @@ const ControladorAluno = {
                 res.json(aluno)
                 console.log('Deu certo')
             } else {
-                res.status(400).send('Email ou senha incorreta')
+                res.status(400).send(';-;')
             }
         } catch (error) {
             res.status(500).send(error.message);

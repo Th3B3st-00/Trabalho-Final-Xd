@@ -59,7 +59,7 @@ const ControladorProfessor = {
 
     login: async (req, res) => {
         try {
-            const professor = await Professores.findOne({
+            const professor = await Professor.findOne({
                 where: {
                     email: req.body.email // Usa o e-mail que veio do frontend
                 }
