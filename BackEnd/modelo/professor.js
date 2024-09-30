@@ -12,23 +12,14 @@ Professor.init({
     nome_professor: {
         type: DataTypes.STRING
     },
-    cpf: {
-        type: DataTypes.STRING
-    },
     data_nasc: {
         type: DataTypes.DATE
     },
     email: {
-        type: DataTypes.TEXT
-    },
-    telefone: {
         type: DataTypes.STRING
     },
-    endereco: {
-        type: DataTypes.TEXT
-    },
     senha: {
-        type: DataTypes.TEXT
+        type: DataTypes.STRING
     }
 }, {
     sequelize,

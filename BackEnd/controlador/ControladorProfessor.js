@@ -59,25 +59,27 @@ const ControladorProfessor = {
 
     login: async (req, res) => {
         try {
+            const email = req.body.email
+            const senha = req.body.senha
             const professor = await Professor.findOne({
                 where: {
-                    email: req.body.email // Usa o e-mail que veio do frontend
+                    email: email // Usa o e-mail que veio do frontend
                 }
             });
+            if(!professor){
+                res.status(404).send('Nenhum aluno encontrado')
+            }
 
-            if(req.body.email == professor.email && req.body.senha == professor.senha){
+            if(email == professor.email && senha == professor.senha){
                 res.json(professor)
+                console.log('Deu certo')
             } else {
-                res.status(400).send('Email ou senha incorreta')
+                res.status(400).send(';-;')
             }
         } catch (error) {
             res.status(500).send(error.message);
         }
-    },
-
-    // Implementação das funções de controle de estoque
-    // registrarEntrada e registrarSaida
-    // ... (a ser implementado)
+    }
 };
 
 module.exports = ControladorProfessor;

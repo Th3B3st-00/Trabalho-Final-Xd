@@ -59,13 +59,18 @@ const ControladorAluno = {
 
     login: async (req, res) => {
         try {
+            const email = req.body.email
+            const senha = req.body.senha
             const aluno = await Aluno.findOne({
                 where: {
-                    email: req.body.email // Usa o e-mail que veio do frontend
+                    email: email // Usa o e-mail que veio do frontend
                 }
             });
+            if(!aluno){
+                res.status(404).send('Nenhum aluno encontrado')
+            }
 
-            if(req.body.email == aluno.email && req.body.senha == aluno.senha){
+            if(email == aluno.email && senha == aluno.senha){
                 res.json(aluno)
                 console.log('Deu certo')
             } else {

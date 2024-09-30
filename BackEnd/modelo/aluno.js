@@ -10,25 +10,16 @@ Aluno.init({
         autoIncrement: true
     },
     nome_aluno: {
-        type: DataTypes.STRING
+        type: DataTypes.TEXT
     },
     data_nasc: {
         type: DataTypes.DATE
     },
     email: {
-        type: DataTypes.STRING
-    },
-    cpf: {
-        type: DataTypes.STRING
-    },
-    telefone: {
-        type: DataTypes.STRING
-    },
-    endereco: {
         type: DataTypes.TEXT
     },
     senha: {
-        type: DataTypes.TEXT
+        type: DataTypes.STRING
     }
 }, {
     sequelize,
